@@ -3,10 +3,6 @@
     padding: 0;
 }
 
-body {
-    background: linear-gradient(245.53deg, #DD5E89 9.16%, #F7BB97 92.14%) fixed;
-}
-
 @font-face {
     font-family: 'Poppins';
     src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&display=swap");

@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   min-height: 100vh;
+  background: linear-gradient(245.53deg, #DD5E89 9.16%, #F7BB97 92.14%) fixed;
 }
