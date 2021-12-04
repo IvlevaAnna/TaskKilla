@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&display=swap");
+}
+
+.card {
+    z-index: 10;
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 18px 20px 20px 31px;
+    background: #Ffffff;
+    border-radius: 10px;
+}
+
+.cardLeft {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.cardRight {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title, .location, .deadline {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 12px;
+}
+
+.location, .deadline {
+    line-height: 16px;
+}
+
+.text {
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 17px;
+    color: #C4C4C4;
+}
+
+.image {
+    max-width: 80%;
+    margin-bottom: 46px;
+}
+
+.mb56 {
+    margin-bottom: 56px;
+}
+
+.mb14 {
+    margin-bottom: 14px;
+}
+
+.highPriority {
+    width: 93px;
+    height: 8px;
+    border-radius: 4px;
+    background: #EB2F06;
+}
+
+.medium-priority {
+    width: 93px;
+    height: 8px;
+    border-radius: 4px;
+    background: #F6B93B;
+}
+
+.low-priority {
+    width: 93px;
+    height: 8px;
+    border-radius: 4px;
+    background: #78E08F;
+}
+
+.btn {
+    background: transparent;
+    border: none;
+}
+
+.visible {
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}

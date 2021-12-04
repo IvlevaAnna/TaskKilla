@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './Board.module.css'
+import { BoardCard } from "../BoardCard/BoardCard";
 
 export const Board = () => {
     return (
@@ -27,6 +28,7 @@ export const Board = () => {
             <div className={s.columns}>
                 <div className={s.column}>
                     <div className={s.status}>To Do</div>
+                    <BoardCard />
                     <div className={s.add}>+ Add new card</div>
                 </div>
                 <div className={s.column}>
