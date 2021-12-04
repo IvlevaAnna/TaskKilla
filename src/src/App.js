@@ -7,7 +7,6 @@ import AddCardForm from './components/AddCardForm/AddCardForm';
 function App() {
   return (
     <div className='App'>
-      <AddCardForm />
       <BoardPage />
     </div>
   );
