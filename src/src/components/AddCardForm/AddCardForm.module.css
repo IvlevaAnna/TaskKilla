@@ -1,0 +1,83 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.formContainer {
+  height: 400px;
+  width: 700px;
+  background-color: white;
+  cursor: default;
+  z-index: 3;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.flex {
+  display: flex;
+  gap: 40px;
+}
+
+.formLeft {
+  display: flex;
+  flex-direction: column;
+  width: 237px;
+  height: 300px;
+  gap: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.formRight {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+}
+
+textarea {
+  height: 100%;
+  resize: none;
+  border: none;
+  padding: 10px;
+}
+
+.addButton {
+  align-self: flex-end;
+  width: 40px;
+  height: 90px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  outline: 2px solid black;
+}
+
+.background {
+  background-color: #ded2d2;
+}
+
+.inputLeft {
+  margin-top: 20px;
+  height: 50px;
+  background-color: #ded2d2;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
