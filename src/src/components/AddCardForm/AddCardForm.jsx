@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import style from './AddCardForm.module.css'
+import { showCardForm, hideCardForm } from '../../appSlice';
 
 export function AddCardForm() {
-    const [isShown, setIsShown] = useState(true);
+    // const [isShown, setIsShown] = useState(true);
+    const dispatch = useDispatch()
+
 
     function handleClose(e) {
-        setIsShown(false);
+        // setIsShown(false);
+        dispatch(hideCardForm())
     }
 
     function disableClose(e){
         e.stopPropagation();
     }
+
+    const isShown = useSelector((state) => state.app.isCardFormShown)
 
     return (
         <React.Fragment>
