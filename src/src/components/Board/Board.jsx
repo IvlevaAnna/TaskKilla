@@ -1,8 +1,12 @@
 import React from 'react'
 import s from './Board.module.css'
 import { BoardCard } from "../BoardCard/BoardCard";
+import { useSelector, useDispatch } from 'react-redux'
+import { showCardForm, setCategory } from '../../appSlice';
+
 
 export const Board = () => {
+    const dispatch = useDispatch()
     return (
         <div className={s.container}>
             <div className={s.filters}>
@@ -29,15 +33,24 @@ export const Board = () => {
                 <div className={s.column}>
                     <div className={s.status}>To Do</div>
                     <BoardCard />
-                    <div className={s.add}>+ Add new card</div>
+                    <button className={s.add} onClick={() => {
+                        dispatch(showCardForm());
+                        dispatch(setCategory("ToDo"));
+                    }}>+ Add new card</button>
                 </div>
                 <div className={s.column}>
                     <div className={s.status}>In Progress</div>
-                    <div className={s.add}>+ Add new card</div>
+                    <button className={s.add} onClick={() => {
+                        dispatch(showCardForm());
+                        dispatch(setCategory("InProgress"));
+                    }}>+ Add new card</button>                
                 </div>
                 <div className={s.column}>
                     <div className={s.status}>Done</div>
-                    <div className={s.add}>+ Add new card</div>
+                    <button className={s.add} onClick={() => {
+                        dispatch(showCardForm());
+                        dispatch(setCategory("Done"));
+                    }}>+ Add new card</button>
                 </div>
             </div>
         </div>
