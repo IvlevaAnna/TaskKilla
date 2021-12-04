@@ -7,13 +7,17 @@ import {createBrowserHistory} from 'history'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'
+import store from './store'
 
 const history = createBrowserHistory()
 
 ReactDOM.render(
+  <Provider store={store}>
   <Router history={history}>
     <App />
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
