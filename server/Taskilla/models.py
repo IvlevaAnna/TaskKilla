@@ -12,9 +12,9 @@ class Cards(models.Model):
     title = models.CharField(_('Название'), max_length=100)
     description = models.CharField(_('Описание'), max_length=255, blank=True)
     status = models.CharField(_('Статус'), max_length=100, default='to do')
-    priority = models.CharField(_('Приоритет'), max_length=100, default='low')
-    image = models.ImageField(_('Картинка'))
-    deadline = models.DateField(_('Дата выполнения задачи'))
+    priority = models.CharField(_('Приоритет'), max_length=100, default='low', blank=True)
+    image = models.ImageField(_('Картинка'), blank=True)
+    deadline = models.DateField(_('Дата выполнения задачи'), blank=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Cards', null=True)
 
