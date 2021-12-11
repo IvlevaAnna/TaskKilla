@@ -5,3 +5,11 @@
   min-height: 100vh;
   background: linear-gradient(245.53deg, #dd5e89 9.16%, #f7bb97 92.14%) fixed;
 }
+
+.mapboxgl-ctrl-attrib-inner,
+.mapboxgl-ctrб,
+.mapboxgl-ctrl-attrib,
+.mapboxgl-ctrl-attrib,
+.mapboxgl-compact-show {
+  display: none;
+}
