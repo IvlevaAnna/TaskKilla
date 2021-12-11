@@ -13,6 +13,7 @@ class Cards(models.Model):
     description = models.CharField(_('Описание'), max_length=255, blank=True)
     status = models.CharField(_('Статус'), max_length=100, default='to do')
     priority = models.CharField(_('Приоритет'), max_length=100, default='low', blank=True)
+    location = models.CharField(_('Адрес'), max_length=100, blank=True)
     image = models.ImageField(_('Картинка'), blank=True)
     deadline = models.DateField(_('Дата выполнения задачи'), blank=True)
 
