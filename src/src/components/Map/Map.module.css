@@ -1,0 +1,61 @@
+.mapContainer {
+  height: 400px;
+  width: 700px;
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+}
+
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+}
+
+.closeMapButton {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeMapButton:hover {
+  cursor: pointer;
+  background-color: bisque;
+}
+
+.mapPinContainer{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+}
+
+.acceptAddress{
+  padding: 5px;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acceptAddress:hover{
+  cursor: pointer;
+  background-color: bisque;
+}
