@@ -1,12 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import s from './Board.module.css'
 import { BoardCard } from "../BoardCard/BoardCard";
 import { useSelector, useDispatch } from 'react-redux'
-import { showCardForm, setCategory } from '../../appSlice';
+import { showCardForm, setCategory, setTaskList } from '../../appSlice';
+import { API } from "../../API";
 
 
 export const Board = () => {
     const dispatch = useDispatch()
+    const tasks = useSelector((state) => state.app.taskList)
+
+    useEffect(() => {
+        API.getJson('http://127.0.0.1:8000/api/main_page/').then( result => dispatch(setTaskList(result)))
+    }, [])
+
+    useEffect(() => {
+        console.log("new list is", tasks)
+    }, [tasks])
+
     return (
         <div className={s.container}>
             <div className={s.filters}>
@@ -32,7 +43,13 @@ export const Board = () => {
             <div className={s.columns}>
                 <div className={s.column}>
                     <div className={s.status}>To Do</div>
-                    <BoardCard />
+                    {
+                        tasks?.map((task) => {
+                            if(task.status === 'ToDo') {
+                                return <BoardCard task={task}/>
+                            }
+                        })
+                    }
                     <button className={s.add} onClick={() => {
                         dispatch(showCardForm());
                         dispatch(setCategory("ToDo"));
@@ -40,6 +57,13 @@ export const Board = () => {
                 </div>
                 <div className={s.column}>
                     <div className={s.status}>In Progress</div>
+                    {
+                        tasks?.map((task) => {
+                            if(task.status === 'InProgress') {
+                                return <BoardCard task={task}/>
+                            }
+                        })
+                    }
                     <button className={s.add} onClick={() => {
                         dispatch(showCardForm());
                         dispatch(setCategory("InProgress"));
@@ -47,6 +71,13 @@ export const Board = () => {
                 </div>
                 <div className={s.column}>
                     <div className={s.status}>Done</div>
+                    {
+                        tasks?.map((task) => {
+                            if(task.status === 'Done') {
+                                return <BoardCard task={task}/>
+                            }
+                        })
+                    }
                     <button className={s.add} onClick={() => {
                         dispatch(showCardForm());
                         dispatch(setCategory("Done"));

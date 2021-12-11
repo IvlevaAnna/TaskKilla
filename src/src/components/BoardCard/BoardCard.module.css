@@ -70,14 +70,14 @@
     background: #EB2F06;
 }
 
-.medium-priority {
+.mediumPriority {
     width: 93px;
     height: 8px;
     border-radius: 4px;
     background: #F6B93B;
 }
 
-.low-priority {
+.lowPriority {
     width: 93px;
     height: 8px;
     border-radius: 4px;
@@ -87,6 +87,7 @@
 .btn {
     background: transparent;
     border: none;
+    z-index: 11;
 }
 
 .visible {
