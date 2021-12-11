@@ -24,7 +24,7 @@ export const Board = () => {
             API.getJson('http://127.0.0.1:8000/api/main_page/')
                 .then( result => dispatch(setTaskList(result)))
         }
-        else {
+        else if (dateFilter !== null) {
             API.getJson('http://127.0.0.1:8000/api/main_page/')
                 .then( result => dispatch(setTaskList(result.filter(task => task.deadline < dateFilter))))
         }
