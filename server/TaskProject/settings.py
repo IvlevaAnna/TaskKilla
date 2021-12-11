@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,7 +37,8 @@ INSTALLED_APPS = [
     'Taskilla',
     'rest_framework',
     'drf_yasg',
-    'corsheaders'
+    'corsheaders',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TaskProject.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend')
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -132,3 +137,19 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:3000',
 ]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '310088418374-papc69pjbus1t4fpmcvqvvbusirsgn3p'  # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
