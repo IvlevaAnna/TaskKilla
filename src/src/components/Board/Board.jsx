@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react'
 import s from './Board.module.css'
 import { BoardCard } from "../BoardCard/BoardCard";
 import { useSelector, useDispatch } from 'react-redux'
-import { showCardForm, setCategory, setTaskList } from '../../appSlice';
+import { showCardForm, setCategory, setTaskList, setDateFilter } from '../../appSlice';
 import { API } from "../../API";
 
 
 export const Board = () => {
     const dispatch = useDispatch()
     const tasks = useSelector((state) => state.app.taskList)
+    const dateFilter = useSelector((state) => state.app.dateFilter)
 
     useEffect(() => {
         API.getJson('http://127.0.0.1:8000/api/main_page/').then( result => dispatch(setTaskList(result)))
@@ -17,6 +18,18 @@ export const Board = () => {
     useEffect(() => {
         console.log("new list is", tasks)
     }, [tasks])
+
+    useEffect(() => {
+        if ( dateFilter === '') {
+            API.getJson('http://127.0.0.1:8000/api/main_page/')
+                .then( result => dispatch(setTaskList(result)))
+        }
+        else {
+            API.getJson('http://127.0.0.1:8000/api/main_page/')
+                .then( result => dispatch(setTaskList(result.filter(task => task.deadline < dateFilter))))
+        }
+
+    }, [dateFilter])
 
     return (
         <div className={s.container}>
@@ -37,7 +50,7 @@ export const Board = () => {
                 </button>
                 <div className={s.filter}>
                     <label form='filter'>Date</label>
-                    <input type='date' id='filter' className={s.inpt}/>
+                    <input type='date' id='filter' className={s.inpt} onChange={(e) => dispatch(setDateFilter(e.target.value))}/>
                 </div>
             </div>
             <div className={s.columns}>
