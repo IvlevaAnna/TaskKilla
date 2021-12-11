@@ -29,7 +29,6 @@ export function AddCardForm() {
                         <form className={style.flex}>
                             <div className={style.formLeft}>
                                 <PrioritySelector />
-                                <div className={style.inputLeft}>Tag for select</div>
                                 <input type="date" className={style.inputLeft}></input>
                                 <button className={style.inputLeft} onClick={(e) => {
                                     e.preventDefault();
