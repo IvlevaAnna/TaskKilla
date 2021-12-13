@@ -11,6 +11,7 @@ export const appSlice = createSlice({
     taskList: [],
     dateFilter: null,
     userAddress: "",
+    priority: ''
   },
   reducers: {
     showCardForm: (state) => {
@@ -43,9 +44,12 @@ export const appSlice = createSlice({
     setUserAddress: (state, action) => {
       state.userAddress = action.payload;
     },
+    setPriority: (state, action) => {
+      state.priority = action.payload;
+    },
   },
 })
 
-export const { showCardForm, hideCardForm, setCategory, showMap, hideMap, setUserLat, setUserLng, setTaskList, setDateFilter, setUserAddress } = appSlice.actions
+export const { showCardForm, hideCardForm, setCategory, showMap, hideMap, setUserLat, setUserLng, setTaskList, setDateFilter, setUserAddress, setPriority } = appSlice.actions
 
 export default appSlice.reducer

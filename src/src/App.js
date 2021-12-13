@@ -10,6 +10,7 @@ import { BoardPage } from "./components/BoardPage/BoardPage";
 import { Error } from "./components/Error/Error";
 import AddCardForm from './components/AddCardForm/AddCardForm';
 import React from "react";
+import {useSelector} from "react-redux";
 
 function App(props) {
     const { history } = props.history
