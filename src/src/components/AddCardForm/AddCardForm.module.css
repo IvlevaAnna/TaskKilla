@@ -51,6 +51,10 @@
   padding: 10px;
 }
 
+.userLoc:hover{
+  cursor:default;
+}
+
 .formRight {
   display: flex;
   justify-content: flex-start;
