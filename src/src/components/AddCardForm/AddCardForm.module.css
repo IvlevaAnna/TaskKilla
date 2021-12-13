@@ -34,6 +34,11 @@
   gap: 20px;
 }
 
+.btn {
+  background-color: transparent;
+  border: none;
+}
+
 .formRight {
   display: flex;
   justify-content: flex-start;
@@ -73,6 +78,17 @@ textarea {
   padding: 10px;
   border: none;
   cursor: pointer;
+}
+
+.locationInput {
+  margin-top: 20px;
+  height: 50px;
+  background-color: #ded2d2;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 
 #upload-photo {
