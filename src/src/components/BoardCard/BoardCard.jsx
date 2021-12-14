@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import s from './BoardCard.module.css'
 import { API } from "../../API";
-import {setTaskList} from "../../appSlice";
-import { useDispatch } from 'react-redux'
+import {setTaskList, showEditForm, setTaskID, setTaskInfo} from "../../appSlice";
+import {useDispatch} from 'react-redux'
 
 export const BoardCard = ( props ) => {
     const dispatch = useDispatch()
@@ -69,7 +69,16 @@ export const BoardCard = ( props ) => {
                     </svg>
 
                 </button>
-                <button className={s.btn} type={"button"}>
+                <button className={s.btn} type={"button"}
+                        onClick={() => {
+                            dispatch(setTaskID(props.task.id))
+                            API.getJson(`http://127.0.0.1:8000/api/main_page/${props.task.id}/`)
+                                .then(result => {
+                                    dispatch(setTaskInfo(result))
+                                    dispatch(showEditForm())
+                                })
+                            // API.putJson(`http://127.0.0.1:8000/api/main_page/${props.task.id}/`)
+                        }}>
                     <svg width="23" height="6" viewBox="0 0 23 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M2.875 6C4.46282 6 5.75 4.65685 5.75 3C5.75 1.34315 4.46282 0 2.875 0C1.28718 0 0 1.34315 0 3C0 4.65685 1.28718 6 2.875 6ZM11.5 6C13.0878 6 14.375 4.65685 14.375 3C14.375 1.34315 13.0878 0 11.5 0C9.91221 0 8.62502 1.34315 8.62502 3C8.62502 4.65685 9.91221 6 11.5 6ZM23 3C23 4.65685 21.7128 6 20.125 6C18.5372 6 17.25 4.65685 17.25 3C17.25 1.34315 18.5372 0 20.125 0C21.7128 0 23 1.34315 23 3Z" fill="#CDCCCA"/>
                     </svg>

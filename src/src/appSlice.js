@@ -4,6 +4,7 @@ export const appSlice = createSlice({
   name: 'app',
   initialState: {
     isCardFormShown: false,
+    isEditFormShown: false,
     category: "",
     isMapShown: false,
     userLat: "",
@@ -11,7 +12,9 @@ export const appSlice = createSlice({
     taskList: [],
     dateFilter: null,
     userAddress: "",
-    priority: ''
+    priority: '',
+    taskID: null,
+    taskInfo: {},
   },
   reducers: {
     showCardForm: (state) => {
@@ -19,6 +22,12 @@ export const appSlice = createSlice({
     },
     hideCardForm: (state) => {
       state.isCardFormShown = false;
+    },
+    showEditForm: (state) => {
+      state.isEditFormShown = true;
+    },
+    hideEditForm: (state) => {
+      state.isEditFormShown = false;
     },
     setCategory: (state, action) => {
       state.category = action.payload;
@@ -47,9 +56,31 @@ export const appSlice = createSlice({
     setPriority: (state, action) => {
       state.priority = action.payload;
     },
+    setTaskID: (state, action) => {
+      state.taskID = action.payload;
+    },
+    setTaskInfo: (state, action) => {
+      state.taskInfo = action.payload;
+    }
   },
 })
 
-export const { showCardForm, hideCardForm, setCategory, showMap, hideMap, setUserLat, setUserLng, setTaskList, setDateFilter, setUserAddress, setPriority } = appSlice.actions
+export const {
+  showCardForm,
+  hideCardForm,
+  showEditForm,
+  hideEditForm,
+  setCategory,
+  showMap,
+  hideMap,
+  setUserLat,
+  setUserLng,
+  setTaskList,
+  setDateFilter,
+  setUserAddress,
+  setPriority,
+  setTaskID,
+  setTaskInfo
+} = appSlice.actions
 
 export default appSlice.reducer
