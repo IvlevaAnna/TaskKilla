@@ -31,6 +31,7 @@
 }
 
 .cardRight {
+    z-index: 20;
     width: 10%;
     display: flex;
     flex-direction: column;

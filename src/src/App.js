@@ -11,6 +11,7 @@ import { Error } from "./components/Error/Error";
 import AddCardForm from './components/AddCardForm/AddCardForm';
 import React from "react";
 import {useSelector} from "react-redux";
+import EditCardForm from "./components/EditCardForm/EditCardForm";
 
 function App(props) {
     const { history } = props.history
@@ -24,6 +25,7 @@ function App(props) {
                     <React.Fragment>
                         <BoardPage/>
                         <AddCardForm/>
+                        <EditCardForm/>
                     </React.Fragment>
                 </Route>
                 <Redirect from='/' to='/board'/>

@@ -3,7 +3,7 @@ import Select from 'react-select'
 import {useDispatch} from "react-redux";
 import { setPriority} from "../../appSlice";
 
-export const PrioritySelector = () => {
+export const PrioritySelector = (props) => {
     const dispatch = useDispatch()
 
     const customStyles = {
@@ -60,7 +60,8 @@ export const PrioritySelector = () => {
         {value: 'low', label: 'low'}
     ]
 
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedValue, setSelectedValue] = useState(props.priority ? props.priority : '');
+    console.log(selectedValue)
 
     dispatch( setPriority(selectedValue))
 
@@ -68,13 +69,14 @@ export const PrioritySelector = () => {
         setSelectedValue(e.value);
     }
 
+
     return (
         <div className={'main'}>
             <Select options={selectOption}
-                    value={selectOption.find(obj => obj.value === selectedValue)}
                     styles={customStyles}
                     placeholder={'Select...'}
                     onChange={handleChange}
+                    value={selectOption.find(obj => obj.value === selectedValue)}
             />
         </div>
     )
