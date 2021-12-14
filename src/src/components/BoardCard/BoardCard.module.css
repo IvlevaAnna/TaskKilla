@@ -95,6 +95,18 @@
     z-index: 11;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
+.editSvg:hover svg path{
+    fill: black;
+}
+
+.deleteSvg:hover svg path{
+    fill: red;
+}
+
 .visible {
     display: flex;
     flex-direction: column;
