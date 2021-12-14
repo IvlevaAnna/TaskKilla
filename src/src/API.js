@@ -25,6 +25,18 @@ function putJson(url, data) {
             console.log('Error')
         });
 }
+function patchJson(url, data) {
+    return fetch(url, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(result => result.json())
+        .catch(error => {
+            console.log('Error')
+        });
+}
 
 function deleteJson(url) {
     return fetch(url, {
@@ -42,5 +54,6 @@ export const API = {
     getJson,
     postJson,
     putJson,
+    patchJson,
     deleteJson
 }
