@@ -15,6 +15,7 @@ export const appSlice = createSlice({
     priority: '',
     taskID: null,
     taskInfo: {},
+    selectedCard: {},
   },
   reducers: {
     showCardForm: (state) => {
@@ -61,7 +62,10 @@ export const appSlice = createSlice({
     },
     setTaskInfo: (state, action) => {
       state.taskInfo = action.payload;
-    }
+    },
+    setSelectedCard: (state, action) => {
+      state.selectedCard = action.payload;
+    },
   },
 })
 
@@ -80,7 +84,8 @@ export const {
   setUserAddress,
   setPriority,
   setTaskID,
-  setTaskInfo
+  setTaskInfo,
+  setSelectedCard,
 } = appSlice.actions
 
 export default appSlice.reducer
