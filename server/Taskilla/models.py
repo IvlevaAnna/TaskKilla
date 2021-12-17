@@ -4,11 +4,17 @@ from django.contrib.auth.models import AbstractUser
 import uuid
 
 
+class MaxImageSizeException(Exception):
+    pass
+
+
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 
 class Cards(models.Model):
+    MAX_IMAGE_SIZE = 614400
+
     title = models.CharField(_('Название'), max_length=100)
     description = models.CharField(_('Описание'), max_length=255, blank=True)
     status = models.CharField(_('Статус'), max_length=100, default='to do')
@@ -18,6 +24,14 @@ class Cards(models.Model):
     deadline = models.DateField(_('Дата выполнения задачи'), blank=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Cards', null=True)
+
+    def save(self, *args, **kwargs):
+        image = self.image
+
+        if image.size > self.MAX_IMAGE_SIZE:
+            raise MaxImageSizeException('Размер изображения больше 600Кб')
+
+        super().save(*args, **kwargs)
 
     class Meta:
         db_table = 'cards'
