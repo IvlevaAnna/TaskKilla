@@ -11,18 +11,21 @@ import { Error } from "./components/Error/Error";
 import AddCardForm from './components/AddCardForm/AddCardForm';
 import React from "react";
 import EditCardForm from "./components/EditCardForm/EditCardForm";
+import { useDispatch } from "react-redux";
+import { setHistory } from "./appSlice";
 
 function App(props) {
     const { history } = props.history
-
+    const dispatch = useDispatch();
+    dispatch(setHistory(props.history));
     return (
         <div className='App'>
             <Switch>
                 <Route history={history} path='/home' component={SignIn} />
                 <Route history={history} path='/error' component={Error} />
                 <Route history={history} path='/board'>
-                    <React.Fragment>
-                        <BoardPage />
+                    <React.Fragment >
+                        <BoardPage history={history} />
                         <AddCardForm />
                         <EditCardForm />
                     </React.Fragment>
@@ -30,7 +33,7 @@ function App(props) {
                 <Route path="*">
                     <Error />
                 </Route>
-                <Redirect from='/' to='/board' />
+                <Redirect from='/' to='/home' />
             </Switch>
         </div>
     );
