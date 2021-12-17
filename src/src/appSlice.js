@@ -16,6 +16,9 @@ export const appSlice = createSlice({
     taskID: null,
     taskInfo: {},
     selectedCard: {},
+    googleUser: {
+    },
+    history: {}
   },
   reducers: {
     showCardForm: (state) => {
@@ -66,6 +69,9 @@ export const appSlice = createSlice({
     setSelectedCard: (state, action) => {
       state.selectedCard = action.payload;
     },
+    setHistory: (state, action) => {
+      state.history = action.payload;
+    },
   },
 })
 
@@ -86,6 +92,7 @@ export const {
   setTaskID,
   setTaskInfo,
   setSelectedCard,
+  setHistory,
 } = appSlice.actions
 
 export default appSlice.reducer

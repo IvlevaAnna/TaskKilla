@@ -4,13 +4,28 @@ import user from '../../img/User.png'
 import logout from '../../img/logout.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
-import { setTaskList } from '../../appSlice';
+import { setIsUserLogin, setTaskList } from '../../appSlice';
 import { API } from "../../API";
+import { GoogleLogout } from 'react-google-login';
+import { useGoogleLogout } from 'react-google-login'
 
-export const Header = () => {
+
+export const Header = (props) => {
     const dispatch = useDispatch()
 
     const tasks = useSelector((state) => state.app.taskList)
+
+    const userGoogle = useSelector((state) => state.app.googleUser)
+
+    const history = useSelector((state) => state.app.history)
+
+    const [storageGoogle, setStorageGoogle] = useState(JSON.parse(localStorage.getItem('loginData')))
+
+    const responseGoogle = (response) => {
+        localStorage.removeItem("loginData");
+        localStorage.removeItem("isLogin");
+        history.push('/home')
+    }
 
     let [searchWord, setSearchWord] = useState("");
 
@@ -46,15 +61,21 @@ export const Header = () => {
                     </div>
                 </div>
                 <div className={s.header_right}>
-                    <div className={s.username}>User Name</div>
+                    <div className={s.username}>{storageGoogle.profileObj.name}</div>
                     <div className={s.userphoto}>
-                        <img src={user} />
+                        <img src={storageGoogle.profileObj.imageUrl} />
                     </div>
-                    <button type={"button"} className={s.btn}>
+                    {/* <button type={"button"} className={s.btn}>
                         <img src={logout} />
-                    </button>
+                    </button> */}
+                    <GoogleLogout
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        buttonText="Logout"
+                        onLogoutSuccess={responseGoogle}
+                    >
+                    </GoogleLogout>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
