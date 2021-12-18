@@ -21,6 +21,7 @@ function App(props) {
     return (
         <div className='App'>
             <Switch>
+                <Route history={history} exact path='/' component={SignIn} />
                 <Route history={history} path='/home' component={SignIn} />
                 <Route history={history} path='/error' component={Error} />
                 <Route history={history} path='/board'>
@@ -30,10 +31,7 @@ function App(props) {
                         <EditCardForm />
                     </React.Fragment>
                 </Route>
-                <Route path="*">
-                    <Error />
-                </Route>
-                <Redirect from='/' to='/home' />
+                <Route component={Error} />
             </Switch>
         </div>
     );
