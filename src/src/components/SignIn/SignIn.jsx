@@ -11,8 +11,7 @@ export const SignIn = (props) => {
     }
 
     const onFail = (response) => {
-        alert('Login is incorrect, tre again');
-        props.history.push('/home');
+        props.history.push('/error');
     }
 
     return (
