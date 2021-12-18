@@ -22,9 +22,13 @@ export const Header = (props) => {
     const [storageGoogle, setStorageGoogle] = useState(JSON.parse(localStorage.getItem('loginData')))
 
     const responseGoogle = (response) => {
-        localStorage.removeItem("loginData");
-        localStorage.removeItem("isLogin");
-        history.push('/home')
+        let ask = window.confirm("Are you sure you want to logout?");
+        if (ask) {
+            localStorage.removeItem("loginData");
+            localStorage.removeItem("isLogin");
+            history.push('/home')
+
+        }
     }
 
     let [searchWord, setSearchWord] = useState("");
