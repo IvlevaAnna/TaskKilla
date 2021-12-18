@@ -65,15 +65,16 @@ export const Header = (props) => {
                     <div className={s.userphoto}>
                         <img src={storageGoogle.profileObj.imageUrl} />
                     </div>
-                    {/* <button type={"button"} className={s.btn}>
+                    <div className={s.btn}>
                         <img src={logout} />
-                    </button> */}
-                    <GoogleLogout
-                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                        buttonText="Logout"
-                        onLogoutSuccess={responseGoogle}
-                    >
-                    </GoogleLogout>
+                        <GoogleLogout
+                            className={s.btnLogout}
+                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                            buttonText="Logout"
+                            onLogoutSuccess={responseGoogle}
+                        >
+                        </GoogleLogout>
+                    </div>
                 </div>
             </div>
         </div >
