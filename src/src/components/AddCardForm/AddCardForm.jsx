@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import style from './AddCardForm.module.css'
-import { showCardForm, hideCardForm, showMap, hideMap, setTaskList } from '../../appSlice';
+import { showCardForm, hideCardForm, showMap, hideMap, setTaskList, setUserAddress } from '../../appSlice';
 import Map from '../Map/Map';
 import { PrioritySelector } from "../PrioritySelector/PrioritySelector";
 import { API } from "../../API";
@@ -13,6 +13,7 @@ export function AddCardForm() {
     function handleClose(e) {
         dispatch(hideMap())
         dispatch(hideCardForm())
+        dispatch(setUserAddress(''))
     }
 
     function disableClose(e) {
@@ -69,7 +70,7 @@ export function AddCardForm() {
                 }
                 break
             case 2:
-                if ( year % 4 === 0) {
+                if (year % 4 === 0) {
                     if (day === 29) {
                         month += 1
                         day = 1

@@ -45,7 +45,6 @@ export default function Map() {
                 .query({ name: 'geolocation' })
                 .then(function (PermissionStatus) {
                     if ('denied' === PermissionStatus.state) {
-                        console.log('MAP MPA MPA');
                         map.current = new mapboxgl.Map({
                             container: mapContainer.current,
                             style: 'mapbox://styles/mapbox/dark-v10',
