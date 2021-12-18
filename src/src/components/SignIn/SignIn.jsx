@@ -4,10 +4,15 @@ import { GoogleLogin } from 'react-google-login';
 
 export const SignIn = (props) => {
 
-    const responseGoogle = (response) => {
+    const onLogin = (response) => {
         localStorage.setItem('loginData', JSON.stringify(response))
         localStorage.setItem('isLogin', true)
         props.history.push('/board');
+    }
+
+    const onFail = (response) => {
+        alert('Login is incorrect, tre again');
+        props.history.push('/home');
     }
 
     return (
@@ -40,8 +45,8 @@ export const SignIn = (props) => {
                     className={s.googleSignIn}
                     clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                     buttonText="Login"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
+                    onSuccess={onLogin}
+                    onFailure={onFail}
                     cookiePolicy={'single_host_origin'}
                 />
             </div>
