@@ -21,15 +21,15 @@ class Cards(models.Model):
     priority = models.CharField(_('Приоритет'), max_length=100, default='low', blank=True)
     location = models.CharField(_('Адрес'), max_length=100, blank=True)
     image = models.ImageField(_('Картинка'), blank=True)
-    deadline = models.DateField(_('Дата выполнения задачи'), blank=True)
+    deadline = models.DateField(_('Дата выполнения задачи'), blank=True, null=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Cards', null=True)
 
     def save(self, *args, **kwargs):
         image = self.image
-
-        if image.size > self.MAX_IMAGE_SIZE:
-            raise MaxImageSizeException('Размер изображения больше 600Кб')
+        if bool(self.image):
+            if image.size > self.MAX_IMAGE_SIZE:
+                raise MaxImageSizeException('Размер изображения больше 600Кб')
 
         super().save(*args, **kwargs)
 
