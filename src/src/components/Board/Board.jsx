@@ -141,6 +141,72 @@ export const Board = () => {
         return 0
     }
 
+    const getMinDate = () => {
+        let minDate = new Date().toISOString().slice(0, 10)
+        let day = +minDate.split('-')[2]
+        let month = +minDate.split('-')[1]
+        let year = +minDate.split('-')[0]
+
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+                if (day === 31) {
+                    month += 1
+                    day = 1
+                }
+                else {
+                    day += 1
+                }
+                break
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if (day === 30) {
+                    month += 1
+                    day = 1
+                }
+                else {
+                    day += 1
+                }
+                break
+            case 12:
+                if (day === 31) {
+                    year += 1
+                    month = 1
+                    day = 1
+                }
+                else {
+                    day += 1
+                }
+                break
+            case 2:
+                if ( year % 4 === 0) {
+                    if (day === 29) {
+                        month += 1
+                        day = 1
+                    }
+                    else {
+                        day += 1
+                    }
+                }
+                else {
+                    if (day === 28) {
+                        month += 1
+                        day = 1
+                    }
+                    else {
+                        day += 1
+                    }
+                }
+        }
+        return `${year}-${month}-${day}`
+    }
+
     return (
         <div className={s.container}>
             <div className={s.filters}>
@@ -162,7 +228,7 @@ export const Board = () => {
                 </button>
                 <div className={s.filter}>
                     <label form='filter'>Date</label>
-                    <input type='date' id='filter' className={s.inpt} onChange={(e) => dispatch(setDateFilter(e.target.value))} />
+                    <input type='date' id='filter' min={getMinDate()} className={s.inpt} onChange={(e) => dispatch(setDateFilter(e.target.value))} />
                 </div>
             </div>
             <div className={s.columns}>
