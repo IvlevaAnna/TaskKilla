@@ -98,7 +98,7 @@ export function AddCardForm() {
                 <div className={style.container} onClick={handleClose}>
                     <div className={style.formContainer} onClick={disableClose}>
                         {isMapShown && <Map></Map>}
-                        <form id="addCardForm"
+                        <form id="addCardForm" data-testid="addCardForm"
                             onSubmit={(e) => {
                                 e.preventDefault()
 
@@ -116,7 +116,7 @@ export function AddCardForm() {
                         >
                             <div className={style.formLeft}>
                                 <PrioritySelector />
-                                <input type="date" className={style.inputLeft} name="deadline" min={getMinDate()}></input>
+                                <input data-testid="addCardFormDeadline" type="date" className={style.inputLeft} name="deadline" min={getMinDate()}></input>
                                 <div className={style.locationInput}>
                                     <div className={style.userLoc}>{loc}</div>
                                     <button className={style.btn} onClick={(e) => {
