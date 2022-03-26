@@ -1,4 +1,4 @@
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './Map.module.css'
 import { useSelector, useDispatch } from 'react-redux'
@@ -115,14 +115,14 @@ export default function Map() {
 
 
     return (
-        <div>
-            <div ref={mapContainer} className={styles.mapContainer}>
-                <button className={styles.closeMapButton} onClick={() => { dispatch(hideMap()) }}>
+        <div data-testid="map_global">
+            <div ref={mapContainer} className={styles.mapContainer} data-testid="map_container">
+                <button className={styles.closeMapButton} onClick={() => { dispatch(hideMap()) }} data-testid="map_close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                         <path d="M9.37112 7.17407L14.6085 2.1643C14.857 1.92696 14.9969 1.60489 14.9972 1.26894C14.9975 0.932989 14.8583 0.61068 14.6101 0.372918C14.362 0.135156 14.0253 0.00141557 13.6741 0.00111888C13.3229 0.000822195 12.9859 0.133993 12.7374 0.371336L7.5 5.3811L2.26263 0.371336C2.01407 0.133574 1.67694 0 1.32542 0C0.973897 0 0.636771 0.133574 0.388207 0.371336C0.139642 0.609098 0 0.931574 0 1.26782C0 1.60407 0.139642 1.92654 0.388207 2.1643L5.62557 7.17407L0.388207 12.1838C0.139642 12.4216 0 12.7441 0 13.0803C0 13.4166 0.139642 13.739 0.388207 13.9768C0.636771 14.2146 0.973897 14.3481 1.32542 14.3481C1.67694 14.3481 2.01407 14.2146 2.26263 13.9768L7.5 8.96704L12.7374 13.9768C12.9859 14.2146 13.3231 14.3481 13.6746 14.3481C14.0261 14.3481 14.3632 14.2146 14.6118 13.9768C14.8604 13.739 15 13.4166 15 13.0803C15 12.7441 14.8604 12.4216 14.6118 12.1838L9.37112 7.17407Z" fill="black" fillOpacity="0.3" />
                     </svg>
                 </button>
-                <button onClick={() => { dispatch(setUserAddress(adr1)); dispatch(hideMap()) }} className={styles.acceptAddress}><svg xmlns="http://www.w3.org/2000/svg" width="353" height="289" viewBox="0 0 353 289" fill="none">
+                <button onClick={() => { dispatch(setUserAddress(adr1)); dispatch(hideMap()) }} className={styles.acceptAddress} data-testid="map_success"><svg xmlns="http://www.w3.org/2000/svg" width="353" height="289" viewBox="0 0 353 289" fill="none">
                     <path d="M336.698 16.4331L112.698 272.433L16.6982 176.433" stroke="black" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 </button>
