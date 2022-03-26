@@ -22,18 +22,6 @@ import store from "../../store"
 //     return GoogleLogin;
 //   });
 
-// let container;
-//   beforeEach(() => {
-//     container = document.createElement("div");
-//     document.body.appendChild(container);
-//   });
-  
-//   afterEach(() => {
-//     unmountComponentAtNode(container);
-//     container.remove();
-//     container = null;
-//   });
-
 it('renders signIn', () => {
         render(<Provider store={store}>
             <MemoryRouter>

@@ -34,7 +34,7 @@ it('do not render without login user', () => {
             </MemoryRouter>
         </Provider>
     );
-    expect(screen.queryByText('Tasк Killa')).not.toBeInTheDocument();
+    expect(screen.queryByText('Tаsk Killa')).not.toBeInTheDocument();
     localStorage.clear();
 });
 
