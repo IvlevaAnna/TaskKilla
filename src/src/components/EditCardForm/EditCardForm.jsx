@@ -114,10 +114,10 @@ export function EditCardForm() {
     return (
         <React.Fragment>
             {isShown &&
-                <div className={style.container} onClick={handleClose}>
+                <div data-testid="cardEditing" className={style.container} onClick={handleClose}>
                     <div className={style.formContainer} onClick={disableClose}>
                         {isMapShown && <Map></Map>}
-                        <form id="editCardForm"
+                        <form id="editCardForm" data-testid="editCardForm"
                             onSubmit={(e) => {
                                 e.preventDefault()
 
