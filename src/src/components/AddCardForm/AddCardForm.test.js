@@ -19,7 +19,7 @@ describe('Add card from tests', () => {
 
         expect(screen.getByTestId('addCardForm')).toBeInTheDocument()
     })
-    it('Open add card form', () => {
+    it('Hide add card form', () => {
         render(
             <Provider store={store}>
                 <MemoryRouter>
@@ -28,9 +28,9 @@ describe('Add card from tests', () => {
             </Provider>
         )
 
-        store.dispatch(showCardForm())
+        store.dispatch(hideCardForm())
 
-        expect(screen.getByTestId('addCardForm')).toBeInTheDocument()
+        expect(screen.getByTestId('addCardForm')).not.toBeInTheDocument()
     })
 
 })
