@@ -5,6 +5,9 @@ import store from "../../store";
 import AddCardForm from "./AddCardForm";
 import {showCardForm, hideCardForm} from "../../appSlice";
 import userEvent from '@testing-library/user-event'
+import React from 'react'
+
+jest.mock('../Map/Map', () => () => 'SomeComponent');
 
 describe('Add card from tests', () => {
     it('Open add card form', () => {
@@ -28,7 +31,9 @@ describe('Add card from tests', () => {
                 </MemoryRouter>
             </Provider>
         )
-
+        
+        const button = screen.getByTestId('button')
+        userEvent.click(button)
         store.dispatch(hideCardForm())
 
         expect(() => screen.getByTestId('addCardForm')).toThrow('Unable to find an element');
@@ -69,6 +74,11 @@ describe('Add card from tests', () => {
     })
 
     it('Handle submit', () => {
+        jest.spyOn(global, "fetch").mockImplementation(() =>
+            Promise.resolve({
+                json: () => Promise.resolve()
+            })
+        );
         render(
             <Provider store={store}>
                 <MemoryRouter>
