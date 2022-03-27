@@ -5,9 +5,8 @@ import store from "../../store";
 import AddCardForm from "./AddCardForm";
 import {showCardForm, hideCardForm} from "../../appSlice";
 import userEvent from '@testing-library/user-event'
-import React from 'react'
 
-jest.mock('../Map/Map', () => () => 'SomeComponent');
+jest.mock('../Map/Map', () => () => 'MapComponent');
 
 describe('Add card from tests', () => {
     it('Open add card form', () => {
@@ -32,8 +31,6 @@ describe('Add card from tests', () => {
             </Provider>
         )
         
-        const button = screen.getByTestId('button')
-        userEvent.click(button)
         store.dispatch(hideCardForm())
 
         expect(() => screen.getByTestId('addCardForm')).toThrow('Unable to find an element');
@@ -93,5 +90,21 @@ describe('Add card from tests', () => {
 
         userEvent.click(addCardForm)
         expect(() => screen.getByTestId('addCardForm')).toThrow('Unable to find an element');
+    })
+
+    it('Open map', () => {
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <AddCardForm/>
+                </MemoryRouter>
+            </Provider>
+        )
+
+        store.dispatch(showCardForm())
+        const button = screen.getByTestId('button')
+        userEvent.click(button)
+
+        expect(screen.getByText(/MapComponent/)).toBeInTheDocument()
     })
 })
