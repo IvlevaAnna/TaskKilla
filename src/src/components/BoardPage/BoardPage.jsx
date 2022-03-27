@@ -15,3 +15,5 @@ export const BoardPage = () => {
         </div>
     )
 }
+
+export default BoardPage;
