@@ -213,7 +213,7 @@ export const Board = () => {
                 <button type={"button"} className={s.priority}>
                     <div className={s.priority}>
                         <div>Priority</div>
-                        <button className={sortMarker ? `${s.btn} ${s.toMax}` : `${s.btn}`} onClick={sortTaskList}>
+                        <button className={sortMarker ? `${s.btn} ${s.toMax}` : `${s.btn}`} data-testid="priority" onClick={sortTaskList}>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                                 <rect width="20" height="20" fill="url(#pattern0)" />
                                 <defs>
@@ -228,7 +228,10 @@ export const Board = () => {
                 </button>
                 <div className={s.filter}>
                     <label form='filter'>Date</label>
-                    <input type='date' id='filter' min={getMinDate()} className={s.inpt} onChange={(e) => dispatch(setDateFilter(e.target.value))} />
+                    <input type='date' id='filter' min={getMinDate()} 
+                    className={s.inpt} 
+                    data-testid="date-filter"
+                    onChange={(e) => dispatch(setDateFilter(e.target.value))} />
                 </div>
             </div>
             <div className={s.columns}>
@@ -287,3 +290,5 @@ export const Board = () => {
         </div>
     )
 }
+
+export default Board;
