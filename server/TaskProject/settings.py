@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
-    'social_django'
+    'social_django',
+    'django_coverage'
 ]
 
 MIDDLEWARE = [
