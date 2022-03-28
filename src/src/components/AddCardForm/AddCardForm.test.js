@@ -53,6 +53,23 @@ describe('Add card from tests', () => {
         expect(() => screen.getByTestId('addCardForm')).toThrow('Unable to find an element');
     })
 
+    it('Correct name', () => {
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <AddCardForm/>
+                </MemoryRouter>
+            </Provider>
+        )
+        store.dispatch(showCardForm())
+
+        const name = screen.getByPlaceholderText('Add name')
+        expect(name).toBeInTheDocument()
+
+        userEvent.type(name, 'test')
+        expect(name).toHaveDisplayValue('test');
+    })
+
     it('Correct description', () => {
         render(
             <Provider store={store}>

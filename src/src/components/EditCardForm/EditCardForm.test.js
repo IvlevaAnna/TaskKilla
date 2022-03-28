@@ -70,6 +70,24 @@ describe('Edit card from tests', () => {
         expect(description).toHaveDisplayValue("test");
     })
 
+    it('Correct name', () => {
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <EditCardForm/>
+                </MemoryRouter>
+            </Provider>
+        )
+        store.dispatch(showEditForm())
+
+        const name = screen.getByPlaceholderText('Add name')
+        expect(name).toBeInTheDocument()
+
+        userEvent.type(name, "test")
+        expect(name).toHaveDisplayValue("test");
+    })
+
+
     it('Handle submit', () => {
         jest.spyOn(global, "fetch").mockImplementation(() =>
             Promise.resolve({
