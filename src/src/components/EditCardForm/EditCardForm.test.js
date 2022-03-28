@@ -6,6 +6,8 @@ import EditCardForm from "./EditCardForm";
 import {showEditForm, hideEditForm} from "../../appSlice";
 import userEvent from '@testing-library/user-event'
 
+jest.mock('../Map/Map', () => () => 'MapComponent');
+
 describe('Edit card from tests', () => {
     it('Open edit card form', () => {
         render(
@@ -69,6 +71,12 @@ describe('Edit card from tests', () => {
     })
 
     it('Handle submit', () => {
+        jest.spyOn(global, "fetch").mockImplementation(() =>
+            Promise.resolve({
+                json: () => Promise.resolve(data)
+            })
+        );
+
         render(
             <Provider store={store}>
                 <MemoryRouter>
@@ -83,5 +91,21 @@ describe('Edit card from tests', () => {
 
         userEvent.click(editCardForm)
         expect(() => screen.getByTestId('editCardForm')).toThrow('Unable to find an element');
+    })
+
+    it('Open map', () => {
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <EditCardForm/>
+                </MemoryRouter>
+            </Provider>
+        )
+
+        store.dispatch(showEditForm())
+        const button = screen.getByTestId('button')
+        userEvent.click(button)
+
+        expect(screen.getByText(/MapComponent/)).toBeInTheDocument()
     })
 })

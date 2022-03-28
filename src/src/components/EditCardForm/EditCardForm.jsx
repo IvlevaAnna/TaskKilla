@@ -141,7 +141,9 @@ export function EditCardForm() {
                                 <input type="date" className={style.inputLeft} defaultValue={card.deadline} name="deadline" min={getMinDate()}></input>
                                 <div className={style.locationInput}>
                                     <div className={style.userLoc}>{card.location}</div>
-                                    <button className={style.btn} onClick={(e) => {
+                                    <button 
+                                    data-testid="button"
+                                    className={style.btn} onClick={(e) => {
                                         e.preventDefault();
                                         dispatch(showMap())
                                     }}
