@@ -77,7 +77,7 @@ class TestMainView(TestCase):
     def test_put_admin(self):
         client = APIClient()
         card = Cards.objects.create(**self.data)
-        client.login(username=self.name, password=self.password)
+        # client.login(username=self.name, password=self.password)
         response = client.put(f'{self.url}{card.id}/', self.data_put)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -85,7 +85,7 @@ class TestMainView(TestCase):
         self.assertEqual(card_.title, self.data_put.get('title'))
         self.assertEqual(card_.description, self.data_put.get('description'))
         self.assertEqual(card_.status, self.data_put.get('status'))
-        client.logout()
+        # client.logout()
 
     def tearDown(self) -> None:
         pass
@@ -157,7 +157,7 @@ class TestMain(APITestCase):
 
     def test_put_admin(self):
         card = Cards.objects.create(**self.data)
-        self.client.login(username=self.name, password=self.password)
+        # self.client.login(username=self.name, password=self.password)
         response = self.client.put(f'{self.url}{card.id}/', self.data_put)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         card_ = Cards.objects.get(id=card.id)
@@ -167,16 +167,16 @@ class TestMain(APITestCase):
         self.assertEqual(card_.priority, self.data_put.get('priority'))
         self.assertEqual(card_.location, self.data_put.get('location'))
         self.assertEqual(card_.deadline, self.data_put.get('deadline'))
-        self.client.logout()
+        # self.client.logout()
 
     def test_put_mixer(self):
         card = mixer.blend(Cards)
-        self.client.login(username=self.name, password=self.password)
+        # self.client.login(username=self.name, password=self.password)
         response = self.client.put(f'{self.url}{card.id}/', self.data_put_new)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         card_ = Cards.objects.get(id=card.id)
         self.assertEqual(card_.title, self.data_put_new.get('title'))
-        self.client.logout()
+        # self.client.logout()
 
     def test_delete_card(self):
         card = Cards.objects.create(**self.data)
