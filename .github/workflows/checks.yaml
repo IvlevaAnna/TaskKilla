@@ -21,7 +21,3 @@ jobs:
       - name : Tests
         run : |
           python ./server/manage.py test
-      - name: Run flake8
-        run: flake8 .
-      - name: Run mypy
-        run: mypy .
