@@ -7,7 +7,7 @@ import { PrioritySelector } from "../PrioritySelector/PrioritySelector";
 import { API } from "../../API";
 
 export function AddCardForm() {
-
+    //test commit
     const dispatch = useDispatch()
 
     function handleClose(e) {
@@ -119,12 +119,12 @@ export function AddCardForm() {
                                 <input data-testid="addCardFormDeadline" type="date" className={style.inputLeft} name="deadline" min={getMinDate()}></input>
                                 <div className={style.locationInput}>
                                     <div className={style.userLoc}>{loc}</div>
-                                    <button 
-                                    data-testid="button"
-                                    className={style.btn} onClick={(e) => {
-                                        e.preventDefault();
-                                        dispatch(showMap())
-                                    }}
+                                    <button
+                                        data-testid="button"
+                                        className={style.btn} onClick={(e) => {
+                                            e.preventDefault();
+                                            dispatch(showMap())
+                                        }}
                                     ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 321 449" fill="none">
                                             <path d="M160.904 0.833008C72.5739 0.833008 0.903931 65.343 0.903931 144.833C0.903931 272.833 160.904 448.833 160.904 448.833C160.904 448.833 320.904 272.833 320.904 144.833C320.904 65.343 249.234 0.833008 160.904 0.833008ZM160.904 224.833C148.246 224.833 135.872 221.079 125.347 214.047C114.823 207.015 106.62 197.019 101.776 185.325C96.9316 173.63 95.6642 160.762 98.1337 148.347C100.603 135.932 106.699 124.529 115.649 115.578C124.6 106.628 136.003 100.532 148.418 98.0627C160.833 95.5933 173.701 96.8607 185.396 101.705C197.09 106.549 207.086 114.752 214.118 125.277C221.15 135.801 224.904 148.175 224.904 160.833C224.885 177.801 218.137 194.069 206.138 206.067C194.14 218.066 177.872 224.814 160.904 224.833Z" fill="black" />
                                         </svg></button>
