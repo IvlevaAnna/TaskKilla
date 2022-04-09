@@ -17,10 +17,13 @@ jobs:
           python-version: 3.9
       - name: Install deps
         run: |
+          cd server/
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name : Tests
-        run : python manage.py test
+        run : |
+          cd server/
+          python manage.py test
       - name: Run flake8
         run: flake8 .
       - name: Run mypy
