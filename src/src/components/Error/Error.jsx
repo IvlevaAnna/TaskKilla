@@ -7,7 +7,7 @@ import {
 
 export const Error = () => {
     return (
-        <div className={s.container}>
+        <div className={s.container} data-testid="error-page">
             <svg width="474" height="434" viewBox="0 0 474 434" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                 <rect width="474" height="434" fill="url(#pattern0)" />
                 <defs>
