@@ -213,7 +213,7 @@ export const Board = () => {
                 <button type={"button"} className={s.priority}>
                     <div className={s.priority}>
                         <div>Priority</div>
-                        <button className={sortMarker ? `${s.btn} ${s.toMax}` : `${s.btn}`} data-testid="priority" onClick={sortTaskList}>
+                        <button className={sortMarker ? `${s.btn} ${s.toMax}` : `${s.btn}`} data-test-id="priority" data-testid="priority" onClick={sortTaskList}>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                                 <rect width="20" height="20" fill="url(#pattern0)" />
                                 <defs>
