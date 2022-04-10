@@ -24,11 +24,10 @@ jobs:
 
       - name: Install deps
         run: |
-          cd server/
-          pip install -r requirments.txt
+          pip install -r ./server/requirments.txt
       - name : Tests
         run : |
-          cd server/
+          cd ./server/
           python manage.py test
 
       - name: Install dependencies
