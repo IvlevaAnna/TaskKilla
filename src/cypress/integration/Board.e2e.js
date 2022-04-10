@@ -104,7 +104,7 @@ describe("Board", () => {
 
     it('date filter', () => {
 
-        cy.intercept('GET', `${serverUrl}/api/main_page/`,{
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
             statusCode: 201,
             body: data
         })
@@ -113,6 +113,7 @@ describe("Board", () => {
         cy.visit('board')
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
+
         cy.get('[data-test-id="date-filter"]').type('2022-04-12')
 
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 4);
