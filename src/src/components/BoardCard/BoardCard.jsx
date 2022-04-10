@@ -58,6 +58,7 @@ export const BoardCard = (props) => {
             onDragOver={(e) => dragOverHangdler(e)}
             onDrop={(e) => dropHangdler(e, props.task)}
             className={s.card} onClick={toggleClass}
+            data-test-id="card-item"
         >
             <div className={s.cardLeft}>
                 {setPriority()}
