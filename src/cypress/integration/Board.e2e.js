@@ -71,4 +71,15 @@ describe("Board", () => {
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 1);
     })
 
+    it('sign out', () => {
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
+            statusCode: 201,
+            body: data,
+        })
+
+        cy.visit('board')
+        cy.get('[data-test-id="board-columns"]').should('be.visible')
+        cy.contains('Logout').should('be.visible').click()
+        cy.get('[data-test-id="sign-in"]').should('be.visible')
+    })
 })
