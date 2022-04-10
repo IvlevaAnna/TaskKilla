@@ -91,10 +91,10 @@ export const Board = () => {
                 priorityB = 3
         }
 
-        if ( priorityA < priorityB) {
+        if (priorityA < priorityB) {
             return -1
         }
-        if ( priorityA > priorityB) {
+        if (priorityA > priorityB) {
             return 1
         }
         return 0
@@ -132,10 +132,10 @@ export const Board = () => {
                 priorityB = 0
         }
 
-        if ( priorityA < priorityB) {
+        if (priorityA < priorityB) {
             return -1
         }
-        if ( priorityA > priorityB) {
+        if (priorityA > priorityB) {
             return 1
         }
         return 0
@@ -185,7 +185,7 @@ export const Board = () => {
                 }
                 break
             case 2:
-                if ( year % 4 === 0) {
+                if (year % 4 === 0) {
                     if (day === 29) {
                         month += 1
                         day = 1
@@ -228,13 +228,13 @@ export const Board = () => {
                 </button>
                 <div className={s.filter}>
                     <label form='filter'>Date</label>
-                    <input type='date' id='filter' min={getMinDate()} 
-                    className={s.inpt} 
-                    data-testid="date-filter"
-                    onChange={(e) => dispatch(setDateFilter(e.target.value))} />
+                    <input type='date' id='filter' min={getMinDate()}
+                        className={s.inpt}
+                        data-testid="date-filter"
+                        onChange={(e) => dispatch(setDateFilter(e.target.value))} />
                 </div>
             </div>
-            <div className={s.columns}>
+            <div className={s.columns} data-test-id="board-columns">
                 <div className={s.column}
                     onDragOver={(e) => dragOverHangdler(e)}
                     onDrop={(e) => dropHandler(e, "ToDo")}
@@ -247,10 +247,13 @@ export const Board = () => {
                             }
                         })
                     }
-                    <button className={s.add} onClick={() => {
-                        dispatch(showCardForm());
-                        dispatch(setCategory("ToDo"));
-                    }}>+ Add new card</button>
+                    <button
+                        className={s.add}
+                        data-test-id="todo-button"
+                        onClick={() => {
+                            dispatch(showCardForm());
+                            dispatch(setCategory("ToDo"));
+                        }}>+ Add new card</button>
                 </div>
                 <div className={s.column}
                     onDragOver={(e) => dragOverHangdler(e)}
