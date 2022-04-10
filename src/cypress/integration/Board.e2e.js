@@ -83,9 +83,9 @@ describe("Board", () => {
         cy.get('[data-test-id="sign-in"]').should('be.visible')
     })
 
-    it.only('date filter', () => {
+    it('date filter', () => {
 
-        cy.intercept('GET', `${serverUrl}/api/main_page/`,{
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
             statusCode: 201,
             body: data
         })
@@ -93,9 +93,8 @@ describe("Board", () => {
 
         cy.visit('board')
         cy.get('[data-test-id="board-columns"]').should('be.visible')
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
 
-        // cy.get('[data-test-id="date-filter"]').should('be.visible')
         cy.get('[data-test-id="date-filter"]').type('2022-04-12')
 
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 4);
