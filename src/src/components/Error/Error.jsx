@@ -20,7 +20,7 @@ export const Error = () => {
 
             <div>
                 Something went wrong... <br />
-                Go to <Link to="/home">start page</Link>
+                Go to <Link to="/home" data-test-id="start-page-link">start page</Link>
             </div>
         </div>
     )
