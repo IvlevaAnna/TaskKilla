@@ -1,6 +1,6 @@
-const serverUrl = Cypress.env('serverUrl');
-
 import data from "../fixtures/data"
+
+const serverUrl = Cypress.env('serverUrl');
 
 describe("Board", () => {
     beforeEach(() => {
@@ -81,5 +81,29 @@ describe("Board", () => {
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.contains('Logout').should('be.visible').click()
         cy.get('[data-test-id="sign-in"]').should('be.visible')
+    })
+
+    it.only('date filter', () => {
+
+        cy.intercept('GET', `${serverUrl}/api/main_page/`,{
+            statusCode: 201,
+            body: data
+        })
+
+
+        cy.visit('board')
+        cy.get('[data-test-id="board-columns"]').should('be.visible')
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
+
+        // cy.get('[data-test-id="date-filter"]').should('be.visible')
+        cy.get('[data-test-id="date-filter"]').type('2022-04-12')
+
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 4);
+
+    })
+
+    it('Should have login button', () => {
+        cy.visit('/')
+        cy.get('button').should('have.text', 'Login')
     })
 })
