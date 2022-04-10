@@ -72,7 +72,7 @@ export const Header = (props) => {
                     <div className={s.userphoto}>
                         <img src={storageGoogle.profileObj.imageUrl} />
                     </div>
-                    <div className={s.btn}>
+                    <div className={s.btn} data-test-id="logout-button">
                         <img src={logout} />
                         <GoogleLogout
                             className={s.btnLogout}
