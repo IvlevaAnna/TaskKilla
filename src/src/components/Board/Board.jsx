@@ -231,6 +231,7 @@ export const Board = () => {
                     <input type='date' id='filter' min={getMinDate()}
                         className={s.inpt}
                         data-test-id="date-filter"
+                        data-testid="date-filter"
                         onChange={(e) => dispatch(setDateFilter(e.target.value))} />
                 </div>
             </div>
