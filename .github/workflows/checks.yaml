@@ -7,39 +7,14 @@ on:
     branches: [ dev, master ]
 
 jobs:
-  build:
+  cypress-run:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Install python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
-      - name: Set up Node.js 
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.17.1
-
-      - name: Install deps
-        run: |
-          pip install -r ./server/requirments.txt
-      - name : Tests
-        run : |
-          cd ./server/
-          python manage.py makemigrations
-          python manage.py migrate
-          python manage.py test
-
-      - name: Install dependencies
-        run: npm install --prefix ./src/
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
           start: npm start
-
-      - name: Run the tests
-        run: npm test --prefix ./src/
