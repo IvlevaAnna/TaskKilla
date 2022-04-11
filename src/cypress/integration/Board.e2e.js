@@ -72,7 +72,7 @@ describe("Board", () => {
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
         cy.get('[data-test-id="search"]').type("Task1")
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 1);
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
     })
 
     it('search by description', () => {
@@ -85,7 +85,7 @@ describe("Board", () => {
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
         cy.get('[data-test-id="search"]').type("description1")
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 1);
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
     })
 
     it('sign out', () => {
