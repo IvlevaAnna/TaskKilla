@@ -148,4 +148,21 @@ describe("Board", () => {
         cy.visit('board')
         cy.get("[data-test-id='user-name']").should('have.text', 'testUser')
     })
+
+    it('can not add invalid item', () => {
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
+            statusCode: 201,
+            body: data
+        })
+
+
+        cy.visit('board')
+        cy.get('[data-test-id="todo-button"]').should('be.visible')
+        cy.get('[data-test-id="board-columns"]').should('be.visible')
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
+        cy.get('[data-test-id="todo-button"]').click()
+        cy.get('[data-test-id="form-submit"]').click()
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
+    })
+
 })
