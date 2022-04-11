@@ -72,7 +72,10 @@ describe("Board", () => {
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
         cy.get('[data-test-id="search"]').type("Task1")
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
+        cy.contains('Task1').should('be.visible')
+        cy.contains('Task2').should('not.exist')
+        cy.contains('Task6').should('not.exist')
+        cy.contains('Task9').should('not.exist')
     })
 
     it('search by description', () => {
@@ -85,7 +88,9 @@ describe("Board", () => {
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
         cy.get('[data-test-id="search"]').type("description1")
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
+        cy.contains('Task2').should('not.exist')
+        cy.contains('Task6').should('not.exist')
+        cy.contains('Task9').should('not.exist')
     })
 
     it('sign out', () => {
