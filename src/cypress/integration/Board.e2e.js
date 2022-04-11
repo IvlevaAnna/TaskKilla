@@ -21,7 +21,7 @@ describe("Board", () => {
 
     it('priority filter', () => {
 
-        cy.intercept('GET', `${serverUrl}/api/main_page/`,{
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
             statusCode: 201,
             body: data
         })
@@ -121,11 +121,31 @@ describe("Board", () => {
     })
 
     it('user name', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`,{
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
             statusCode: 201,
             body: data
         })
         cy.visit('board')
         cy.get("[data-test-id='user-name']").should('have.text', 'testUser')
+    })
+
+    it('renders map', async () => {
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
+            statusCode: 201,
+            body: data,
+        })
+
+        cy.visit('board')
+        cy.get('[data-test-id="board-columns"]').should('be.visible')
+        cy.get('[data-test-id="todo-button"]').click()
+        cy.get('[data-test-id="user-lock"]').should('be.visible')
+        cy.get('[data-test-id="show-map-button"]').click()
+        cy.get('[data-test-id="map-global"]').then(() => {
+            cy.get('[data-test-id="accept-map-button"]').click().then(() => {
+                cy.get('[data-test-id="user-lock"]').should('be.visible')
+            })
+
+        }
+        )
     })
 })

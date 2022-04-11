@@ -118,8 +118,9 @@ export function AddCardForm() {
                                 <PrioritySelector />
                                 <input data-testid="addCardFormDeadline" type="date" className={style.inputLeft} name="deadline" min={getMinDate()}></input>
                                 <div className={style.locationInput}>
-                                    <div className={style.userLoc}>{loc}</div>
+                                    <div className={style.userLoc} data-test-id="user-lock">{loc}</div>
                                     <button
+                                        data-test-id="show-map-button"
                                         data-testid="button"
                                         className={style.btn} onClick={(e) => {
                                             e.preventDefault();
