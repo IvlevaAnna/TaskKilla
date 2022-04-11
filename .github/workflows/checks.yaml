@@ -31,18 +31,8 @@ jobs:
           python manage.py makemigrations
           python manage.py migrate
           python manage.py test
-
-      - name: Setup npm package
-        run: npm init -y && npm install
-
       - name: Install dependencies
         run: npm install --prefix ./src/
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          build: npm run build
-          start: npm start
 
       - name: Run the tests
         run: npm test --prefix ./src/
