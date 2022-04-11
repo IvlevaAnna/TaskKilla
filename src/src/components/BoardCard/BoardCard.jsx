@@ -18,11 +18,11 @@ export const BoardCard = (props) => {
     const setPriority = () => {
         switch (props.task.priority) {
             case 'high':
-                return <div className={s.highPriority}></div>
+                return <div id='highPriority' className={s.highPriority}></div>
             case 'medium':
-                return <div className={s.mediumPriority}></div>
+                return <div id='mediumPriority' className={s.mediumPriority}></div>
             case 'low':
-                return <div className={s.lowPriority}></div>
+                return <div id='lowPriority' className={s.lowPriority}></div>
 
             default: return null
         }
@@ -92,6 +92,7 @@ export const BoardCard = (props) => {
             </div>
             <div className={s.cardRight}>
                 <button className={[s.btn, s.deleteSvg].join(" ")} type={"button"}
+                        data-test-id={`delCardBtn${props.task.id}`}
                     onClick={() => {
                         API.deleteJson(`http://127.0.0.1:8000/api/main_page/${props.task.id}/`).then(() =>
                             API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result)))

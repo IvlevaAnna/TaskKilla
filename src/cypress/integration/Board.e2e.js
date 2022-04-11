@@ -19,6 +19,25 @@ describe("Board", () => {
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
     })
 
+    it('priority filter', () => {
+
+        cy.intercept('GET', `${serverUrl}/api/main_page/`,{
+            statusCode: 201,
+            body: data
+        })
+
+
+        cy.visit('board')
+        cy.get('[data-test-id="board-columns"]').should('be.visible')
+        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
+        cy.get('[data-test-id="priority"]').click()
+
+        cy.get('[data-test-id="card-item"]').eq(0).children().eq(0).children().eq(0).should('have.id', 'lowPriority')
+        cy.get('[data-test-id="card-item"]').eq(1).children().eq(0).children().eq(0).should('have.id', 'mediumPriority')
+        cy.get('[data-test-id="card-item"]').eq(2).children().eq(0).children().eq(0).should('have.id', 'highPriority')
+
+    })
+
     it('add item', () => {
         data.push({
             id: "9",
@@ -101,8 +120,12 @@ describe("Board", () => {
 
     })
 
-    it('Should have login button', () => {
-        cy.visit('/')
-        cy.get('button').should('have.text', 'Login')
+    it('user name', () => {
+        cy.intercept('GET', `${serverUrl}/api/main_page/`,{
+            statusCode: 201,
+            body: data
+        })
+        cy.visit('board')
+        cy.get("[data-test-id='user-name']").should('have.text', 'testUser')
     })
 })
