@@ -68,7 +68,7 @@ export const Header = (props) => {
                     </div>
                 </div>
                 <div className={s.header_right}>
-                    <div className={s.username}>{storageGoogle.profileObj.name}</div>
+                    <div className={s.username} data-test-id='user-name'>{storageGoogle.profileObj.name}</div>
                     <div className={s.userphoto}>
                         <img src={storageGoogle.profileObj.imageUrl} />
                     </div>
