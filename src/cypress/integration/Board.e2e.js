@@ -19,7 +19,7 @@ describe("Board", () => {
         cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
     })
 
-    it.skip('priority filter', () => {
+    it('priority filter', () => {
 
         cy.intercept('GET', `${serverUrl}/api/main_page/`, {
             statusCode: 201,
@@ -62,7 +62,7 @@ describe("Board", () => {
         cy.contains('title9').should('be.visible')
     })
 
-    it.skip('search by title', () => {
+    it('search by title', () => {
         cy.intercept('GET', `${serverUrl}/api/main_page/`, {
             statusCode: 201,
             body: data,
