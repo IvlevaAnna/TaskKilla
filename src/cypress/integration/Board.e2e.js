@@ -120,15 +120,6 @@ describe("Board", () => {
 
     })
 
-    it('user name', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data
-        })
-        cy.visit('board')
-        cy.get("[data-test-id='user-name']").should('have.text', 'testUser')
-    })
-
     it('renders map', async () => {
         cy.intercept('GET', `${serverUrl}/api/main_page/`, {
             statusCode: 201,
@@ -147,5 +138,14 @@ describe("Board", () => {
 
         }
         )
+    })
+
+    it('user name', () => {
+        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
+            statusCode: 201,
+            body: data
+        })
+        cy.visit('board')
+        cy.get("[data-test-id='user-name']").should('have.text', 'testUser')
     })
 })
