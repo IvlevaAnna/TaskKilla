@@ -22,21 +22,21 @@ jobs:
         with:
           node-version: 14.17.1
 
-      - name: Install deps
+      - name: Install python dependencies
         run: |
           pip install -r ./server/requirments.txt
-      - name : Tests
+      - name : Python tests
         run : |
           cd ./server/
           python manage.py makemigrations
           python manage.py migrate
           python manage.py test
-
-      - name: Install dependencies
+      - name: Install npm dependencies
         run: npm install --prefix ./src/
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-
-      - name: Run the tests
+      - name : Cypress tests
+        run : |
+          cd ./src/
+          npm run test:cypress
+      - name: Npm tests
         run: npm test --prefix ./src/
