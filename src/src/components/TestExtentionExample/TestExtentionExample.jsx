@@ -9,7 +9,7 @@ export const TestExtentionExample = () => {
     let tasks = useSelector((state) => state.app.taskList)
 
     useEffect(() => {
-        API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result)))
+        API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result)))
     }, [tasks])
 
     return (

@@ -61,7 +61,6 @@ export const PrioritySelector = (props) => {
     ]
 
     const [selectedValue, setSelectedValue] = useState(props.priority ? props.priority : '');
-    console.log(selectedValue)
 
     dispatch( setPriority(selectedValue))
 

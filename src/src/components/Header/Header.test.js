@@ -90,3 +90,15 @@ it('search by descriptopn works', async () => {
     userEvent.type(screen.queryByTestId('search'), 'description1');
     expect(store.getState().app.taskList[0].description).toBe('description1');
 });
+
+it('Correct redirect after logout', () => {
+    render(<Provider store={store}>
+        <MemoryRouter>
+            <Header />
+        </MemoryRouter>
+    </Provider>);
+
+    expect(screen.queryByTestId('search')).toBeInTheDocument();
+    userEvent.type(screen.queryByTestId('search'), 'description1');
+    expect(store.getState().app.taskList[0].description).toBe('description1');
+});

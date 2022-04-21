@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import s from './BoardCard.module.css'
 import { API } from "../../API";
 import { setTaskList, showEditForm, setTaskID, setTaskInfo, setSelectedCard } from "../../appSlice";
 import { useDispatch, useSelector } from 'react-redux'
+import {onValue, set} from "firebase/database";
+import {getHistoryByIdRef, getHistoryByTaskIdRef} from "../../services/firebase";
 
 export const BoardCard = (props) => {
     const dispatch = useDispatch()
     const [isActive, setActive] = useState(false);
+    const [history, setHistory] = useState([])
 
     const toggleClass = () => {
         setActive(!isActive)
@@ -45,9 +48,21 @@ export const BoardCard = (props) => {
     function dropHangdler(e, item) {
         e.preventDefault();
         e.target.style.backgroundColor = "white"
-        API.patchJson(`http://127.0.0.1:8000/api/main_page/${selectedCard.id}/`, { status: item.status }).then(() =>
-            API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result))))
+        API.patchJson(`http://cs33699-django-n2mwk.tw1.ru/api/main_page/${selectedCard.id}/`, { status: item.status }).then(() =>
+            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result))))
     }
+
+    useEffect(() => {
+        const unsubscribe = onValue(getHistoryByTaskIdRef(props.task.id), (snapshot) => {
+            const newHistory = []
+            snapshot.forEach((child) => {
+                newHistory.push(child.val())
+            })
+            setHistory(newHistory)
+        });
+
+        return unsubscribe;
+    }, []);
 
     return (
         <div
@@ -88,14 +103,20 @@ export const BoardCard = (props) => {
                                 Dead line: {props.task.deadline}
                             </div> : null
                     }
+                    {
+                        history?.map((item) =>
+                            <div className={s.history}>{item.text}</div>)
+                    }
                 </div>
             </div>
             <div className={s.cardRight}>
                 <button className={[s.btn, s.deleteSvg].join(" ")} type={"button"}
                         data-test-id={`delCardBtn${props.task.id}`}
                     onClick={() => {
-                        API.deleteJson(`http://127.0.0.1:8000/api/main_page/${props.task.id}/`).then(() =>
-                            API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result)))
+                        API.deleteJson(`http://cs33699-django-n2mwk.tw1.ru/api/main_page/${props.task.id}/`)
+                            .then(() => set(getHistoryByTaskIdRef(props.task.id),null))
+                            .then(() =>
+                            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result)))
                         )
                     }}>
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +127,7 @@ export const BoardCard = (props) => {
                 <button className={[s.btn, s.editSvg].join(" ")} type={"button"}
                     onClick={() => {
                         dispatch(setTaskID(props.task.id))
-                        API.getJson(`http://127.0.0.1:8000/api/main_page/${props.task.id}/`)
+                        API.getJson(`http://cs33699-django-n2mwk.tw1.ru/api/main_page/${props.task.id}/`)
                             .then(result => {
                                 dispatch(setTaskInfo(result))
                                 dispatch(showEditForm())

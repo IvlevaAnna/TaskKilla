@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.8.3",
     "clipboardy": "^3.0.0",
     "cypress-localstorage-commands": "^1.7.0",
+    "firebase": "^9.6.10",
     "history": "^5.1.0",
     "mapbox-gl": "^2.7.0",
     "react": "^17.0.2",
@@ -26,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:cypress": "start-server-and-test start http://localhost:3000 cypress",
-    "cypress": "cypress run",
+    "cypress": "cypress open",
     "coverage": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },

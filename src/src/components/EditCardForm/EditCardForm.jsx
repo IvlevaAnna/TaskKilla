@@ -14,6 +14,8 @@ import {
 import Map from '../Map/Map';
 import { API } from "../../API";
 import { PrioritySelector } from "../PrioritySelector/PrioritySelector";
+import {set} from "firebase/database";
+import {getHistoryByIdRef, getHistoryByTaskIdRef} from "../../services/firebase";
 
 export function EditCardForm() {
     const [image , setImage] = useState(false)
@@ -29,6 +31,8 @@ export function EditCardForm() {
     function disableClose(e) {
         e.stopPropagation();
     }
+
+    const [storageGoogle, setStorageGoogle] = useState(JSON.parse(localStorage.getItem('loginData')))
 
     const isShown = useSelector((state) => state.app.isEditFormShown)
     const taskID = useSelector((state => state.app.taskID))
@@ -127,8 +131,15 @@ export function EditCardForm() {
                                 formData.append('location', locFormData)
                                 let priorityFormData = (priority !== card.priority) ? priority : card.priority
                                 formData.append('priority', priorityFormData)
-                                API.putJson(`http://127.0.0.1:8000/api/main_page/${taskID}/`, formData)
-                                    .then(() => API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result))))
+                                API.putJson(`http://cs33699-django-n2mwk.tw1.ru/api/main_page/${taskID}/`, formData)
+                                    .then( res => {
+                                        const historyId = `his-${Date.now()}`
+                                        const newHistory = {
+                                            id: historyId,
+                                            text: `Edited by ${storageGoogle.profileObj.name} ${new Date().toLocaleDateString()}`
+                                        }
+                                        set(getHistoryByIdRef(res.id, historyId), newHistory)})
+                                    .then(() => API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result))))
 
                                 dispatch(hideMap())
                                 dispatch(hideEditForm())

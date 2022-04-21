@@ -44,6 +44,12 @@
     margin-top: 12px;
 }
 
+.history {
+    font-size: 10px;
+    margin-top: 5px;
+    color: #888888;
+}
+
 .location, .deadline {
     line-height: 16px;
 }
