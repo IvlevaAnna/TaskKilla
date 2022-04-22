@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './BoardCard.module.css'
 import { API } from "../../API";
 import { setTaskList, showEditForm, setTaskID, setTaskInfo, setSelectedCard } from "../../appSlice";
 import { useDispatch, useSelector } from 'react-redux'
-import {onValue, set} from "firebase/database";
-import {getHistoryByIdRef, getHistoryByTaskIdRef} from "../../services/firebase";
+import { onValue, set } from "firebase/database";
+import { getHistoryByIdRef, getHistoryByTaskIdRef } from "../../services/firebase";
 
 export const BoardCard = (props) => {
     const dispatch = useDispatch()
@@ -111,20 +111,22 @@ export const BoardCard = (props) => {
             </div>
             <div className={s.cardRight}>
                 <button className={[s.btn, s.deleteSvg].join(" ")} type={"button"}
-                        data-test-id={`delCardBtn${props.task.id}`}
+                    data-test-id={`delCardBtn${props.task.id}`}
                     onClick={() => {
                         API.deleteJson(`http://cs33699-django-n2mwk.tw1.ru/api/main_page/${props.task.id}/`)
-                            .then(() => set(getHistoryByTaskIdRef(props.task.id),null))
+                            .then(() => set(getHistoryByTaskIdRef(props.task.id), null))
                             .then(() =>
-                            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result)))
-                        )
+                                API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result)))
+                            )
                     }}>
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.37112 7.125L14.6085 2.1495C14.857 1.91378 14.9969 1.59391 14.9972 1.26026C14.9975 0.926607 14.8583 0.606504 14.6101 0.370367C14.362 0.134231 14.0253 0.00140589 13.6741 0.00111123C13.3229 0.000816571 12.9859 0.133077 12.7374 0.368796L7.5 5.3443L2.26263 0.368796C2.01407 0.13266 1.67694 0 1.32542 0C0.973897 0 0.636771 0.13266 0.388207 0.368796C0.139642 0.604932 0 0.925202 0 1.25915C0 1.5931 0.139642 1.91337 0.388207 2.1495L5.62557 7.125L0.388207 12.1005C0.139642 12.3366 0 12.6569 0 12.9909C0 13.3248 0.139642 13.6451 0.388207 13.8812C0.636771 14.1173 0.973897 14.25 1.32542 14.25C1.67694 14.25 2.01407 14.1173 2.26263 13.8812L7.5 8.90571L12.7374 13.8812C12.9859 14.1173 13.3231 14.25 13.6746 14.25C14.0261 14.25 14.3632 14.1173 14.6118 13.8812C14.8604 13.6451 15 13.3248 15 12.9909C15 12.6569 14.8604 12.3366 14.6118 12.1005L9.37112 7.125Z" fill="black" fillOpacity="0.7" />
                     </svg>
 
                 </button>
-                <button className={[s.btn, s.editSvg].join(" ")} type={"button"}
+                <button
+                    data-test-id={`editCardBtn${props.task.id}`}
+                    className={[s.btn, s.editSvg].join(" ")} type={"button"}
                     onClick={() => {
                         dispatch(setTaskID(props.task.id))
                         API.getJson(`http://cs33699-django-n2mwk.tw1.ru/api/main_page/${props.task.id}/`)
