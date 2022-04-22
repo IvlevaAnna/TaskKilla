@@ -1,5 +1,3 @@
-import data from "../fixtures/data"
-
 const serverUrl = Cypress.env('serverUrl');
 
 describe("Board", () => {
@@ -9,91 +7,65 @@ describe("Board", () => {
     });
 
     it('all cards', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data,
-        })
-
-        cy.visit('board')
-        cy.get('[data-test-id="board-columns"]').should('be.visible')
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                const length = res.body.length
+                cy.visit('board')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
+            })
     })
 
     it('priority filter', () => {
-
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data
-        })
-
-
-        cy.visit('board')
-        cy.get('[data-test-id="board-columns"]').should('be.visible')
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 8);
-        cy.get('[data-test-id="priority"]').click()
-
-        cy.get('[data-test-id="card-item"]').eq(0).children().eq(0).children().eq(0).should('have.id', 'lowPriority')
-        cy.get('[data-test-id="card-item"]').eq(1).children().eq(0).children().eq(0).should('have.id', 'mediumPriority')
-        cy.get('[data-test-id="card-item"]').eq(2).children().eq(0).children().eq(0).should('have.id', 'highPriority')
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                const length = res.body.length
+                cy.visit('board')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
+                cy.get('[data-test-id="priority"]').click()
+                cy.get('[data-test-id="card-item"]').eq(0).children().eq(0).should('not.have.id', 'highPriority')
+                cy.get('[data-test-id="card-item"]').eq(0).children().eq(0).should('not.have.id', 'megiumPriority')
+            })
 
     })
 
     it('add item', () => {
-        data.push({
-            id: "9",
-            title: "title9",
-            description: "99999",
-            status: 'ToDo'
-        })
-
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data
-        })
-
-
         cy.visit('board')
         cy.get('[data-test-id="todo-button"]').should('be.visible')
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.get('[data-test-id="todo-button"]').click()
-        cy.get('[data-test-id=cardname-input]').type('title9')
-        cy.get('[data-test-id=carddiscription-input]').type('99999')
+        cy.get('[data-test-id=cardname-input]').type('Task4')
+        cy.get('[data-test-id=carddiscription-input]').type('Added task')
         cy.get('[data-test-id="form-submit"]').click()
-        cy.contains('title9').should('be.visible')
+        cy.contains('Task4').should('be.visible')
     })
 
     it('search by title', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data,
-        })
-
-        cy.visit('board')
-        cy.get('[data-test-id="board-columns"]').should('be.visible')
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
-        cy.get('[data-test-id="search"]').type("Task1")
+        let length = 0
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                length = res.body.length
+                cy.visit('board')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
+            })
         cy.contains('Task1').should('be.visible')
     })
 
     it('search by description', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data,
-        })
-
-        cy.visit('board')
-        cy.get('[data-test-id="board-columns"]').should('be.visible')
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
-        cy.get('[data-test-id="search"]').type("description1")
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                const length = res.body.length
+                cy.visit('board')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
+                cy.get('[data-test-id="search"]').type("Interior")
+            })
         cy.contains('Task1').should('be.visible')
     })
 
     it('sign out', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data,
-        })
-
         cy.visit('board')
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.contains('Logout').should('be.visible').click()
@@ -101,66 +73,80 @@ describe("Board", () => {
     })
 
     it('date filter', () => {
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                const length = res.body.length
+                cy.visit('board')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
 
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data
-        })
+                cy.get('[data-test-id="date-filter"]').type('2022-04-15')
+                cy.contains('Task1').should('be.visible')
 
-
-        cy.visit('board')
-        cy.get('[data-test-id="board-columns"]').should('be.visible')
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
-
-        cy.get('[data-test-id="date-filter"]').type('2022-04-12')
-
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 4);
-
+            })
     })
 
-    it('renders map', async () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data,
-        })
-
+    it('renders map', () => {
         cy.visit('board')
         cy.get('[data-test-id="board-columns"]').should('be.visible')
         cy.get('[data-test-id="todo-button"]').click()
         cy.get('[data-test-id="user-lock"]').should('be.visible')
         cy.get('[data-test-id="show-map-button"]').click()
-        cy.get('[data-test-id="map-global"]').then(() => {
-            cy.get('[data-test-id="accept-map-button"]').click().then(() => {
-                cy.get('[data-test-id="user-lock"]').should('be.visible')
+        cy.get('[data-test-id="map-global"]')
+            .then(() => {
+                cy.get('[data-test-id="accept-map-button"]').click().then(() => {
+                    cy.get('[data-test-id="user-lock"]').should('be.visible')
+                })
             })
-
-        }
-        )
     })
 
     it('user name', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data
-        })
         cy.visit('board')
         cy.get("[data-test-id='user-name']").should('have.text', 'testUser')
     })
 
     it('can not add invalid item', () => {
-        cy.intercept('GET', `${serverUrl}/api/main_page/`, {
-            statusCode: 201,
-            body: data
-        })
-
-
-        cy.visit('board')
-        cy.get('[data-test-id="todo-button"]').should('be.visible')
-        cy.get('[data-test-id="board-columns"]').should('be.visible')
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
-        cy.get('[data-test-id="todo-button"]').click()
-        cy.get('[data-test-id="form-submit"]').click()
-        cy.get('[data-test-id="card-item"]').its('length').should('eq', 9);
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                const length = res.body.length
+                cy.visit('board')
+                cy.get('[data-test-id="todo-button"]').should('be.visible')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
+                cy.get('[data-test-id="todo-button"]').click()
+                cy.get('[data-test-id="form-submit"]').click()
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
+            })
     })
 
+
+    it('delete item', () => {
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                const length = res.body.length
+                const id = res.body[length - 1].id
+                cy.visit('board')
+                cy.get('[data-test-id="todo-button"]').should('be.visible')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
+                cy.get(`[data-test-id="delCardBtn${id}"]`).click()
+                cy.contains('Tаsk4').should('not.exist')
+            })
+    })
+
+
+    it('edit item', () => {
+        cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
+            .then(res => {
+                const length = res.body.length
+                const id = res.body[length - 2].id
+                cy.visit('board')
+                cy.get('[data-test-id="todo-button"]').should('be.visible')
+                cy.get('[data-test-id="board-columns"]').should('be.visible')
+                cy.get(`[data-test-id="editCardBtn${id}"]`).click()
+                cy.get('[data-test-id="edit-card-name"]').clear().type('Task1')
+                cy.get(`[data-test-id="edit-card-button"]`).click()
+                cy.contains('Task1').should('be.visible')
+            })
+    })
 })

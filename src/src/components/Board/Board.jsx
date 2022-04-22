@@ -15,20 +15,16 @@ export const Board = () => {
 
 
     useEffect(() => {
-        API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result)))
+        API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result)))
     }, [])
 
     useEffect(() => {
-        console.log("new list is", tasks)
-    }, [tasks])
-
-    useEffect(() => {
         if (dateFilter === '') {
-            API.getJson('http://127.0.0.1:8000/api/main_page/')
+            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/')
                 .then(result => dispatch(setTaskList(result)))
         }
         else if (dateFilter !== null) {
-            API.getJson('http://127.0.0.1:8000/api/main_page/')
+            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/')
                 .then(result => dispatch(setTaskList(result.filter(task => task.deadline < dateFilter))))
         }
 
@@ -36,8 +32,8 @@ export const Board = () => {
 
     function dropHandler(e, newStatus) {
         e.preventDefault();
-        API.patchJson(`http://127.0.0.1:8000/api/main_page/${selectedCard.id}/`, { status: newStatus }).then(() =>
-            API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result))))
+        API.patchJson(`http://cs33699-django-n2mwk.tw1.ru/api/main_page/${selectedCard.id}/`, { status: newStatus }).then(() =>
+            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result))))
     }
 
     function dragOverHangdler(e) {
@@ -49,11 +45,11 @@ export const Board = () => {
     const sortTaskList = () => {
         console.log(sortMarker)
         if (sortMarker) {
-            API.getJson('http://127.0.0.1:8000/api/main_page/')
+            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/')
                 .then(result => dispatch(setTaskList(result.sort(compareToMin))))
         }
         else {
-            API.getJson('http://127.0.0.1:8000/api/main_page/')
+            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/')
                 .then(result => dispatch(setTaskList(result.sort(compareToMax))))
         }
         setSortMarker(!sortMarker)

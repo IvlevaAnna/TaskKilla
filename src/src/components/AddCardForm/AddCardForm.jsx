@@ -5,6 +5,8 @@ import { showCardForm, hideCardForm, showMap, hideMap, setTaskList, setUserAddre
 import Map from '../Map/Map';
 import { PrioritySelector } from "../PrioritySelector/PrioritySelector";
 import { API } from "../../API";
+import {getHistoryByIdRef, getHistoryByTaskIdRef} from '../../services/firebase'
+import {onChildAdded, onValue, set} from 'firebase/database'
 
 export function AddCardForm() {
 
@@ -19,6 +21,8 @@ export function AddCardForm() {
     function disableClose(e) {
         e.stopPropagation();
     }
+
+    const [storageGoogle, setStorageGoogle] = useState(JSON.parse(localStorage.getItem('loginData')))
 
     const isShown = useSelector((state) => state.app.isCardFormShown)
     const isMapShown = useSelector((state) => state.app.isMapShown)
@@ -106,8 +110,15 @@ export function AddCardForm() {
                                 formData.append('status', category)
                                 formData.append('location', loc)
                                 formData.append('priority', priority)
-                                API.postJson('http://127.0.0.1:8000/api/main_page/', formData)
-                                    .then(() => API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result))))
+                                API.postJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/', formData)
+                                    .then( res => {
+                                        const historyId = `his-${Date.now()}`
+                                        const newHistory = {
+                                            id: historyId,
+                                            text: `Created by ${storageGoogle.profileObj.name} ${new Date().toLocaleDateString()}`
+                                        }
+                                        set(getHistoryByIdRef(res.id, historyId), newHistory)})
+                                    .then(() => API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result))))
 
                                 dispatch(hideMap())
                                 dispatch(hideCardForm())
