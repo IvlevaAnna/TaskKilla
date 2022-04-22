@@ -40,9 +40,9 @@ export const Header = (props) => {
         }
         else if (searchItem) {
             var regexp = new RegExp("^" + searchItem, 'g');
-            dispatch(setTaskList(searchList.filter(
+            API.getJson('http://127.0.0.1:8000/api/main_page/').then(result => dispatch(setTaskList(result.filter(
                 (item => item.title.search(regexp) >= 0 || item.description.search(regexp) >= 0)
-            )))
+            ))))
         }
     }
 
