@@ -24,9 +24,8 @@ describe("Board", () => {
                 cy.get('[data-test-id="board-columns"]').should('be.visible')
                 cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
                 cy.get('[data-test-id="priority"]').click()
-                // cy.get('[data-test-id="card-item"]').eq(0).children().eq(0).children().eq(0).should('have.id', 'lowPriority')
-                // cy.get('[data-test-id="card-item"]').eq(1).children().eq(0).children().eq(0).should('have.id', 'mediumPriority')
-                // cy.get('[data-test-id="card-item"]').eq(2).children().eq(0).children().eq(0).should('have.id', 'highPriority')
+                cy.get('[data-test-id="card-item"]').eq(0).children().eq(0).should('not.have.id', 'highPriority')
+                cy.get('[data-test-id="card-item"]').eq(0).children().eq(0).should('not.have.id', 'megiumPriority')
             })
 
     })
