@@ -68,6 +68,7 @@ describe("Board", () => {
                 cy.get('[data-test-id="search"]').type("Interior")
                 cy.get('[data-test-id="card-item"]').its('length').should('eq', 1);
             })
+   
     })
 
     it('sign out back', () => {
