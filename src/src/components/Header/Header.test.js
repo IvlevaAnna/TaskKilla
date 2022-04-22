@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { MemoryRouter } from 'react-router-dom'
-import { screen, render} from '@testing-library/react'; 
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import store from "../../store"
@@ -10,16 +10,16 @@ global.localStorage.setItem("loginData", '{"profileObj":{"name":"testUser"}}');
 
 const data = [
     {
-      title: "Task1",
-      description: "description1"
+        title: "Task1",
+        description: "description1"
     },
     {
-      title: "Task2",
-      description: "description2"
+        title: "Task2",
+        description: "description2"
     },
     {
-      title: "Task3",
-      description: "description3"
+        title: "Task3",
+        description: "description3"
     }
 ];
 
@@ -29,7 +29,7 @@ it('renders header', async () => {
             json: () => Promise.resolve(data)
         })
     );
-    
+
     render(<Provider store={store}>
         <MemoryRouter>
             <Header />
@@ -91,14 +91,14 @@ it('search by descriptopn works', async () => {
     expect(store.getState().app.taskList[0].description).toBe('description1');
 });
 
-it('Correct redirect after logout', () => {
-    render(<Provider store={store}>
-        <MemoryRouter>
-            <Header />
-        </MemoryRouter>
-    </Provider>);
+// it('Correct redirect after logout', () => {
+//     render(<Provider store={store}>
+//         <MemoryRouter>
+//             <Header />
+//         </MemoryRouter>
+//     </Provider>);
 
-    expect(screen.queryByTestId('search')).toBeInTheDocument();
-    userEvent.type(screen.queryByTestId('search'), 'description1');
-    expect(store.getState().app.taskList[0].description).toBe('description1');
-});
+//     expect(screen.queryByTestId('search')).toBeInTheDocument();
+//     userEvent.type(screen.queryByTestId('search'), 'description1');
+//     expect(store.getState().app.taskList[0].description).toBe('description1');
+// });
