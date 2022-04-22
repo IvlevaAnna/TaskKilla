@@ -40,9 +40,9 @@ export const Header = (props) => {
         }
         else if (searchItem) {
             var regexp = new RegExp("^" + searchItem, 'g');
-            API.getJson('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(result => dispatch(setTaskList(result.filter(
+            dispatch(setTaskList(searchList.filter(
                 (item => item.title.search(regexp) >= 0 || item.description.search(regexp) >= 0)
-            ))))
+            )))
         }
     }
 

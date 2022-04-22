@@ -46,16 +46,16 @@ describe("Board", () => {
         cy.contains('Task4').should('be.visible')
     })
 
-    it('search by title back', () => {
+    it.only('search by title back', () => {
+        let length = 0
         cy.request('http://cs33699-django-n2mwk.tw1.ru/api/main_page/').then(res => res.json)
             .then( res => {
-                const length = res.body.length
+                length = res.body.length
                 cy.visit('board')
                 cy.get('[data-test-id="board-columns"]').should('be.visible')
                 cy.get('[data-test-id="card-item"]').its('length').should('eq', length);
-                cy.get('[data-test-id="search"]').type("Task1").type('{enter}')
-                cy.get('[data-test-id="card-item"]').its('length').should('eq', 1);
             })
+        cy.get('[data-test-id="search"]').type("Task1").get('[data-test-id="card-item"]').its('length').should('eq', 1);
     })
 
     it('search by description back', () => {
